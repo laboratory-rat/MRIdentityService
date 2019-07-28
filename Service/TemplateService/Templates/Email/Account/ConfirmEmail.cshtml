@@ -1,0 +1,29 @@
+﻿@model MRPackage.Package.Email.UserConfirmEmailModel
+@{
+    Layout = "Layout";
+}
+
+<table>
+    <tr>
+        <td style="text-align:center">
+            Confirm email on Mad Rat Services.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Hi @Model.FirstName @Model.LastName!
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Please, confirm your email, by clicking the link below. <br />
+            <link href="@Model.ConfirmLink" rel="stylesheet" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Or copy next url to url bar and direct to service. <br />
+            <strong>@Model.ConfirmLink</strong>
+        </td>
+    </tr>
+</table>
