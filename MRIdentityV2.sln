@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{3D16ACF0-A2E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{C6F2E161-9654-466E-B31F-9F2D8B3C6355}"
 	ProjectSection(SolutionItems) = preProject
+		Config\buildspec.yaml = Config\buildspec.yaml
 		Config\Dockerfile = Config\Dockerfile
 	EndProjectSection
 EndProject

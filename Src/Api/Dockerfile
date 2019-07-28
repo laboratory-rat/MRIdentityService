@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.401-stretch AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
 COPY ["Src/Api/Api.csproj", "Src/Api/"]
 COPY ["Service/EmailService/EmailService.csproj", "Service/EmailService/"]
