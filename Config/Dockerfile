@@ -1,20 +1,20 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
-WORKDIR /src
-COPY ["Src/Api/Api.csproj", "Src/Api/"]
-RUN dotnet restore "Src/Api/Api.csproj"
+# Copy csproj and restore as distinct layers
+COPY *.sln ./
+COPY Src/Api/Api.csproj Api/
+RUN dotnet restore
 COPY . .
-WORKDIR "/src/Src/Api"
-RUN dotnet build "Api.csproj" -c Release -o /app
 
-FROM build AS publish
-RUN dotnet publish "Api.csproj" -c Release -o /app
+# Copy everything else and build
+WORKDIR Api
+RUN dotnet publish -c Release -o ./out 
 
-FROM base AS final
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=build-env /app/Api/out .
 ENTRYPOINT ["dotnet", "Api.dll"]
